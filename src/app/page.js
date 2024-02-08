@@ -1,6 +1,15 @@
+"use client";
 import Image from "next/image";
-
+import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import { setApplication } from "@/redux/reducer/appSlice";
 export default function Home() {
+  const [state, setState] = useState('');
+  const dispatch = useDispatch();
+  // const applicationValue = useSelector(state => state.app.value);
+
+  console.log("applicationValue", useSelector(state => state.appsetter.value));
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -38,7 +47,8 @@ export default function Home() {
           priority
         />
       </div>
-
+      <input type="text" value={state} onChange={(e) => setState(e.target.value)} />
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-[-2%] py-2 px-4 rounded" onClick={() => dispatch(setApplication(state))}>setRedux</button>
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
         <a
           href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
